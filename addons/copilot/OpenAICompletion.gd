@@ -1,7 +1,7 @@
 @tool
 extends "res://addons/copilot/LLM.gd"
 
-const URL = "https://api.openai.com/v1/completions"
+const URL = "http://localhost:11434/v1/completions"
 const PROMPT_PREFIX = """#This is a GDScript script using Godot 4.0. 
 #That means the new GDScript 2.0 syntax is used. Here's a couple of important changes that were introduced:
 #- Use @export annotation for exports
@@ -22,7 +22,7 @@ const MAX_LENGTH = 8500
 
 func _get_models():
 	return [
-		"text-davinci-003"
+		"codellama:7b"
 	]
 
 func _set_model(model_name):

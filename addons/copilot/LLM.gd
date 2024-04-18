@@ -5,6 +5,7 @@ var model
 var api_key
 var allow_multiline
 
+signal chat_received(chat_message)
 signal completion_received(completion, pre, post)
 signal completion_error(error)
 

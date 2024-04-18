@@ -116,11 +116,11 @@ size_flags_horizontal = 10
 item_count = 3
 selected = 1
 fit_to_longest_item = false
-popup/item_0/text = "text-davinci-003"
+popup/item_0/text = "codellama:7b"
 popup/item_0/id = 0
-popup/item_1/text = "gpt-3.5-turbo"
+popup/item_1/text = "codellama:7b"
 popup/item_1/id = 1
-popup/item_2/text = "gpt-4"
+popup/item_2/text = "gpt-4-github-copilot"
 popup/item_2/id = 2
 
 [node name="ShortcutSetting" type="HBoxContainer" parent="VBoxParent"]
@@ -146,16 +146,14 @@ size_flags_horizontal = 10
 [node name="Modifier" type="OptionButton" parent="VBoxParent/ShortcutSetting/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-item_count = 4
-selected = 2
-popup/item_0/text = "Cmd"
+item_count = 3
+selected = 0
+popup/item_0/text = "Alt"
 popup/item_0/id = 0
-popup/item_1/text = "Option"
+popup/item_1/text = "Ctrl"
 popup/item_1/id = 1
-popup/item_2/text = "Control"
+popup/item_2/text = "Shift"
 popup/item_2/id = 2
-popup/item_3/text = "Shift"
-popup/item_3/id = 3
 
 [node name="Key" type="OptionButton" parent="VBoxParent/ShortcutSetting/HBoxContainer"]
 layout_mode = 2
@@ -251,6 +249,7 @@ button_pressed = true
 text = "Enabled"
 
 [node name="Info" type="RichTextLabel" parent="VBoxParent"]
+visible = false
 layout_mode = 2
 focus_mode = 2
 fit_content = true

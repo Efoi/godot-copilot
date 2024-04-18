@@ -1,7 +1,7 @@
 @tool
 extends "res://addons/copilot/LLM.gd"
 
-const URL = "https://api.openai.com/v1/chat/completions"
+const URL = "http://localhost:11434/v1/chat/completions"
 const SYSTEM_TEMPLATE = """You are a brilliant coding assistant for the game-engine Godot. The version used is Godot 4.0, and all code must be valid GDScript!
 That means the new GDScript 2.0 syntax is used. Here's a couple of important changes that were introduced:
 - Use @export annotation for exports
@@ -38,8 +38,7 @@ const ROLES = {
 
 func _get_models():
 	return [
-		"gpt-3.5-turbo",
-		"gpt-4"
+		"codellama:7b"
 	]
 
 func _set_model(model_name):
