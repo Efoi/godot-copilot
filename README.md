@@ -6,6 +6,13 @@ AI-assisted development for the Godot engine.
 
 Compatible with `4.x` and `3.x`.
 
+### Whats this fork about?
+
+I wanted to run local models. So I'm adding some local configuration parameters for the AI models that one would like to use.
+![AI Chat image](public_assets/ChatWithSyntax.png)
+
+![AI model settings](public_assets/settings.png)
+
 ### What does this do?
 
 Godot Copilot uses OpenAI APIs (other models/providers may be supported in the future) to retrieve AI-generated code completions.
