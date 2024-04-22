@@ -22,7 +22,7 @@ const MAX_LENGTH = 8500
 
 func _get_models():
 	return [
-		"codellama:7b"
+		"codeqwen"
 	]
 
 func _set_model(model_name):

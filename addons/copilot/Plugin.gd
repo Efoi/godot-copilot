@@ -4,7 +4,7 @@ extends EditorPlugin
 	
 const version = "1.0.0"
 const scene_path = "res://addons/copilot/CopilotUI.tscn"
-const chat_path = "res://addons/copilot/ChatWindow.tscn"
+const chat_path = "res://addons/copilot/src/chat/ChatWindow.tscn"
 var dock
 var chat_window
 var editor_interface = get_editor_interface()

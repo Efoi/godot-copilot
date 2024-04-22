@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs0t7fy3cw58i"]
+
+[ext_resource type="Script" path="res://addons/copilot/ChatWindow.gd" id="1_t8lsc"]
+[ext_resource type="Script" path="res://addons/copilot/TextEdit.gd" id="2_qgngo"]
+[ext_resource type="Script" path="res://addons/copilot/AIChat.gd" id="3_eoh5w"]
+
+[node name="ChatWindow" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchor_right = 0.828
+anchor_bottom = 0.88
+offset_right = 0.143921
+offset_bottom = -0.240051
+script = ExtResource("1_t8lsc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+offset_bottom = -2.0
+
+[node name="chatPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/chatPanelContainer"]
+layout_mode = 2
+follow_focus = true
+
+[node name="chatcontainer" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter some fancy stuff
+"
+script = ExtResource("2_qgngo")
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "Chat!
+"
+
+[node name="Clear" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="AIChat" type="Node" parent="."]
+script = ExtResource("3_eoh5w")
+
+[connection signal="EnterPressed" from="VBoxContainer/HBoxContainer/TextEdit" to="." method="_on_text_edit_enter_pressed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/TextEdit" to="VBoxContainer/HBoxContainer/TextEdit" method="_on_text_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Clear" to="." method="_on_clear_pressed"]

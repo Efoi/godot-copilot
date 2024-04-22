@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://rv5dl08lcb8e"]
+[gd_scene load_steps=6 format=3 uid="uid://rv5dl08lcb8e"]
 
 [ext_resource type="Script" path="res://addons/copilot/Copilot.gd" id="1_pq1gj"]
 [ext_resource type="Script" path="res://addons/copilot/OpenAIChat.gd" id="2"]
 [ext_resource type="Material" uid="uid://cccmbprav6vgu" path="res://addons/copilot/small_icon.tres" id="2_gdw4j"]
 [ext_resource type="Script" path="res://addons/copilot/OpenAICompletion.gd" id="3_loa2x"]
 [ext_resource type="Material" uid="uid://bl1rtf743e4l3" path="res://addons/copilot/large_icon.tres" id="3_xn70b"]
-[ext_resource type="Script" path="res://addons/copilot/GithubCopilot.gd" id="6_hmh8w"]
 
 [node name="Copilot" type="Control"]
 layout_mode = 3
@@ -91,6 +90,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 10
+text = "65481"
 placeholder_text = "API Key"
 secret = true
 
@@ -113,15 +113,13 @@ layout_mode = 2
 [node name="Model" type="OptionButton" parent="VBoxParent/ModelSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
-item_count = 3
-selected = 1
+item_count = 2
+selected = 0
 fit_to_longest_item = false
-popup/item_0/text = "codellama:7b"
+popup/item_0/text = "codeqwen"
 popup/item_0/id = 0
-popup/item_1/text = "codellama:7b"
+popup/item_1/text = "codeqwen"
 popup/item_1/id = 1
-popup/item_2/text = "gpt-4-github-copilot"
-popup/item_2/id = 2
 
 [node name="ShortcutSetting" type="HBoxContainer" parent="VBoxParent"]
 custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
@@ -263,9 +261,6 @@ script = ExtResource("3_loa2x")
 [node name="OpenAIChat" type="Node" parent="LLMs"]
 script = ExtResource("2")
 
-[node name="GithubCopilot" type="Node" parent="LLMs"]
-script = ExtResource("6_hmh8w")
-
 [node name="Version" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 12
@@ -288,5 +283,3 @@ vertical_alignment = 2
 [connection signal="completion_received" from="LLMs/OpenAICompletion" to="." method="_on_code_completion_received"]
 [connection signal="completion_error" from="LLMs/OpenAIChat" to="." method="_on_code_completion_error"]
 [connection signal="completion_received" from="LLMs/OpenAIChat" to="." method="_on_code_completion_received"]
-[connection signal="completion_error" from="LLMs/GithubCopilot" to="." method="_on_code_completion_error"]
-[connection signal="completion_received" from="LLMs/GithubCopilot" to="." method="_on_code_completion_received"]

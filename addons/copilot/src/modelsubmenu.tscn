@@ -1,0 +1,162 @@
+[gd_scene load_steps=2 format=3 uid="uid://df1fv6w0wtiy"]
+
+[ext_resource type="Script" path="res://addons/copilot/src/modelsubmenu.gd" id="1_yg1hg"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_yg1hg")
+
+[node name="HeaderLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "Settings for:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="namesetting2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/namesetting2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Reference Name
+"
+horizontal_alignment = 1
+
+[node name="ReferenceName" type="LineEdit" parent="VBoxContainer/namesetting2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "TestModel1"
+
+[node name="namesetting" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/namesetting"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Model Name
+"
+horizontal_alignment = 1
+
+[node name="ModelName" type="LineEdit" parent="VBoxContainer/namesetting"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "codeqwen:7b"
+
+[node name="modelstting5" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/modelstting5"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "URL
+"
+horizontal_alignment = 1
+
+[node name="ModelURL" type="LineEdit" parent="VBoxContainer/modelstting5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "http://localhost:port/v1/chat/completions"
+
+[node name="modelstting2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/modelstting2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Prompt"
+horizontal_alignment = 1
+
+[node name="ModelPrompt" type="TextEdit" parent="VBoxContainer/modelstting2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "You are omnipotent, allknowing coder. 
+Whatever you say is law.
+You're brilliance in Godot is unparalleled."
+
+[node name="modelstting4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/modelstting4"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "API key
+"
+horizontal_alignment = 1
+
+[node name="ModelAPIKey" type="LineEdit" parent="VBoxContainer/modelstting4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "If you use any commercial AI's..."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="copilot" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "If you are using Copilot API, we will authorize using the default copilot auth url on connection."
+text = "Copilot"
+
+[node name="code_completion" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Code completion will add this to your prompt: 
+You may only answer in code, never add any explanations. 
+In your prompt, there will be an !INSERT_CODE_HERE! tag. 
+Only respond with plausible code that may be inserted at that point.
+Never repeat the full script, only the parts to be inserted. 
+Treat this as if it was an autocompletion. 
+You may continue whatever word or expression was left unfinished before the tag. 
+Make sure indentation matches the surrounding context."
+text = "Code Completion"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="save" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save
+"
+
+[node name="copy" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Copy"
+
+[node name="delete" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Delete"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="text_changed" from="VBoxContainer/namesetting2/ReferenceName" to="." method="_on_reference_name_text_changed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/copilot" to="." method="_on_copilot_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/code_completion" to="." method="_on_code_completion_toggled"]
+[connection signal="pressed" from="HBoxContainer/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="HBoxContainer/copy" to="." method="_on_copy_pressed"]
+[connection signal="pressed" from="HBoxContainer/delete" to="." method="_on_delete_pressed"]

@@ -48,7 +48,7 @@ const ROLES = {
 
 func _get_models():
 	return [
-		"gpt-4-github-copilot"
+		"codeqwen"
 	]
 
 func _set_model(model_name):

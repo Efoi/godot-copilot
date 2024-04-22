@@ -2,7 +2,7 @@
 extends "res://addons/copilot/LLM.gd"
 
 const URL = "http://localhost:11434/v1/chat/completions"
-const SYSTEM_TEMPLATE = """You are a brilliant coding assistant for the game-engine Godot. The version used is Godot 4.0, and all code must be valid GDScript!
+const SYSTEM_TEMPLATE = """You are a brilliant coding assistant for the game-engine Godot. The version used is Godot 4.0
 That means the new GDScript 2.0 syntax is used. Here's a couple of important changes that were introduced:
 - Use @export annotation for exports
 - Use Node3D instead of Spatial, and position instead of translation
@@ -15,10 +15,8 @@ That means the new GDScript 2.0 syntax is used. Here's a couple of important cha
 - You can't use enumerate(OBJECT). Instead, use "for i in len(OBJECT):"
 
 Remember, this is not Python. It's GDScript for use in Godot.
-
-You may only answer in code, never add any explanations. In your prompt, there will be an !INSERT_CODE_HERE! tag. Only respond with plausible code that may be inserted at that point. Never repeat the full script, only the parts to be inserted. Treat this as if it was an autocompletion. You may continue whatever word or expression was left unfinished before the tag. Make sure indentation matches the surrounding context."""
-const INSERT_TAG = "!INSERT_CODE_HERE!"
-const MAX_LENGTH = 8500
+"""
+const MAX_LENGTH = 15000
 
 class Message:
 	var role: String
@@ -38,29 +36,22 @@ const ROLES = {
 
 func _get_models():
 	return [
-		"codeqwen"
+		"codellama:7b"
 	]
 
 func _set_model(model_name):
-	model = model_name
+	model = "codellama:7b"
 
 func _send_user_prompt(user_prompt, user_suffix):
-	var messages = format_prompt(user_prompt, user_suffix)
-	get_completion(messages, user_prompt, user_suffix)
+	var messages = format_prompt(user_prompt)
+	get_completion(messages, user_prompt)
 
-func format_prompt(prompt, suffix):
+func format_prompt(prompt):
 	var messages = []
 	var system_prompt = SYSTEM_TEMPLATE
-	
-	var combined_prompt = prompt + suffix
+	var combined_prompt = prompt
 	var diff = combined_prompt.length() - MAX_LENGTH
-	if diff > 0:
-		if suffix.length() > diff:
-			suffix = suffix.substr(0,diff)
-		else:
-			prompt = prompt.substr(diff - suffix.length())
-			suffix = ""
-	var user_prompt = prompt + INSERT_TAG + suffix
+	var user_prompt = prompt 
 	
 	var msg = Message.new()
 	msg.role = ROLES.SYSTEM
@@ -74,13 +65,13 @@ func format_prompt(prompt, suffix):
 	
 	return messages
 
-func get_completion(messages, prompt, suffix):
+func get_completion(messages, prompt):
+	var suffix = ""
 	var body = {
 		"model": model,
 		"messages": messages,
-		"temperature": 0.7,
-		"max_tokens": 500,
-		"stop": "\n\n" if allow_multiline else "\n" 
+		"temperature": 0.3,
+		"max_tokens": 2500
 	}
 	var headers = [
 		"Content-Type: application/json",
@@ -90,6 +81,7 @@ func get_completion(messages, prompt, suffix):
 	add_child(http_request)
 	http_request.connect("request_completed",on_request_completed.bind(prompt, suffix, http_request))
 	var json_body = JSON.stringify(body)
+	print(json_body)
 	var error = http_request.request(URL, headers, HTTPClient.METHOD_POST, json_body)
 	if error != OK:
 		emit_signal("completion_error", null)
@@ -106,4 +98,4 @@ func on_request_completed(result, response_code, headers, body, pre, post, http_
 	var completion = response.choices[0].message
 	if is_instance_valid(http_request):
 		http_request.queue_free()
-	emit_signal("completion_received", completion.content, pre, post)
+	emit_signal("chat_received", completion.content, pre, post)

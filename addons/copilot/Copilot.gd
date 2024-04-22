@@ -41,6 +41,7 @@ func _ready():
 	load_config()
 
 func populate_models():
+	
 	#Add all found models to settings
 	model_select.clear()
 	for llm in llms.get_children():

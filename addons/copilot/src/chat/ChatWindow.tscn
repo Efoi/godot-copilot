@@ -1,0 +1,247 @@
+[gd_scene load_steps=9 format=3 uid="uid://bs0t7fy3cw58i"]
+
+[ext_resource type="Script" path="res://addons/copilot/src/chat/ChatWindow.gd" id="1_28qoq"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/settingscontainer.gd" id="2_408cr"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/TextEdit.gd" id="2_a040a"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/modelmenu.gd" id="3_jr1wr"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/AIChat-settings.gd" id="3_uuqkh"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/AIChat.gd" id="4_aci60"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/chatsettings.gd" id="4_fd3i7"]
+[ext_resource type="Script" path="res://addons/copilot/src/chat/ccsettings.gd" id="5_h01dy"]
+
+[node name="ChatWindow" type="Control"]
+custom_minimum_size = Vector2(100, 180)
+layout_mode = 3
+anchor_right = 0.828
+anchor_bottom = 0.88
+offset_right = 0.143921
+offset_bottom = -0.240051
+script = ExtResource("1_28qoq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+offset_bottom = -2.0
+
+[node name="chatPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="chatscroll" type="ScrollContainer" parent="VBoxContainer/chatPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+follow_focus = true
+
+[node name="chatcontainer" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/chatscroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="settingsscroll" type="ScrollContainer" parent="VBoxContainer/chatPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="settingscontainer" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_408cr")
+
+[node name="LeftMenu" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="modelSettings" type="Button" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+text = "Models"
+
+[node name="chatSettings" type="Button" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+text = "Chat"
+
+[node name="codeCompletion" type="Button" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+text = "Code Completion"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveBtn" type="Button" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Close"
+
+[node name="LoadDefaults" type="Button" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu"]
+layout_mode = 2
+text = "LoadDefaults"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer"]
+layout_mode = 2
+
+[node name="modelmenu" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_jr1wr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Models"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="modelList" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Container" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="CreateNew" type="Button" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu/VBoxContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "create"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu"]
+layout_mode = 2
+
+[node name="modelsubmenues" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="chatsettings" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("4_fd3i7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings/VBoxContainer"]
+layout_mode = 2
+text = "Settings for the AI Chat"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Model"
+horizontal_alignment = 1
+
+[node name="modelSelector" type="OptionButton" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+allow_reselect = true
+
+[node name="ccsettings" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_h01dy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings/VBoxContainer"]
+layout_mode = 2
+text = "Settings for Code Completion"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Model"
+horizontal_alignment = 1
+
+[node name="ccmodelSelector" type="OptionButton" parent="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+allow_reselect = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter your prompt, or paste in code.
+"
+script = ExtResource("2_a040a")
+
+[node name="Clear" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="Settings" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Config
+"
+script = ExtResource("3_uuqkh")
+
+[node name="AIChat" type="Node" parent="."]
+script = ExtResource("4_aci60")
+
+[connection signal="pressed" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu/modelSettings" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer" method="_on_model_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu/chatSettings" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer" method="_on_chat_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu/codeCompletion" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer" method="_on_code_completion_pressed"]
+[connection signal="pressed" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu/SaveBtn" to="VBoxContainer/HBoxContainer/Settings" method="_on_save_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/LeftMenu/LoadDefaults" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer" method="_on_load_defaults_pressed"]
+[connection signal="pressed" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu/VBoxContainer/Container/CreateNew" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/modelmenu" method="_on_create_new_pressed"]
+[connection signal="item_selected" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings/VBoxContainer/HBoxContainer/modelSelector" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/chatsettings" method="_on_model_selector_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings/VBoxContainer/HBoxContainer/ccmodelSelector" to="VBoxContainer/chatPanelContainer/settingsscroll/settingscontainer/ccsettings" method="_on_model_selector_item_selected"]
+[connection signal="EnterPressed" from="VBoxContainer/HBoxContainer/TextEdit" to="." method="_on_text_edit_enter_pressed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/TextEdit" to="VBoxContainer/HBoxContainer/TextEdit" method="_on_text_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Settings" to="VBoxContainer/HBoxContainer/Settings" method="on_settings_clicked"]

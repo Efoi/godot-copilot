@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://o4ays7d2hq8x"]
+
+[ext_resource type="StyleBox" uid="uid://bm4o83j4ubseo" path="res://addons/copilot/resources/styleBocCode.tres" id="1_xn4e5"]
+
+[resource]
+CodeEdit/colors/caret_background_color = Color(0.423529, 0.423529, 0.423529, 1)
+CodeEdit/colors/font_color = Color(1, 1, 1, 1)
+CodeEdit/font_sizes/font_size = 14
+CodeEdit/styles/completion = ExtResource("1_xn4e5")
+CodeEdit/styles/focus = ExtResource("1_xn4e5")
+CodeEdit/styles/normal = ExtResource("1_xn4e5")
+CodeEdit/styles/read_only = ExtResource("1_xn4e5")
+RichTextLabel/styles/normal = ExtResource("1_xn4e5")

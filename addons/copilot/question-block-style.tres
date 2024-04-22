@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://d1ddh61wuh2bm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0e22"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.00784314, 0.121569, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.627451, 0.337255, 0.384314, 1)
+
+[resource]
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_b0e22")
